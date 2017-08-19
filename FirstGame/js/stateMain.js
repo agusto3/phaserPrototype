@@ -39,8 +39,6 @@ var StateMain = {
 		game.input.onDown.add(this.mouseDown, this);
 		
 		this.blocks = game.add.group();
-		
-		this.makeBlocks();
     },
     mouseDown: function() {
 		
@@ -72,6 +70,7 @@ var StateMain = {
     },
     update: function() {
 		 game.physics.arcade.collide(this.hero, this.ground);
+		 this.moveBlocks();
 		
 	},
 	makeBlocks: function() {
@@ -80,5 +79,8 @@ var StateMain = {
             var block = game.add.sprite(0, -i * 25, "block");
             this.blocks.add(block);
         }
+    },
+	moveBlocks: function() {
+        console.log("moving through");
     }
 }

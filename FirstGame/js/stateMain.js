@@ -10,7 +10,8 @@ var StateMain = {
         //turn the background sky blue
         game.stage.backgroundColor = "#00ffff";
         //add the ground
-        var ground = game.add.sprite(0, game.height * .9, "ground");
+        this.ground = game.add.sprite(0, game.height * .9, "ground");
+		
         //add the hero in 
         this.hero = game.add.sprite(game.width * .2, ground.y - 25, "hero");
         //add the power bar just above the head of the hero
@@ -21,11 +22,16 @@ var StateMain = {
         game.input.onDown.add(this.mouseDown, this);
 
 		//start the physics engine
-		game.physics.startSystem(Phaser.Physics.ARCADE);
+        game.physics.startSystem(Phaser.Physics.ARCADE);
+        //enable the hero for physics
+        game.physics.enable(this.hero, Phaser.Physics.ARCADE);
+        game.physics.enable(this.ground, Phaser.Physics.ARCADE);
 		
-		//enable the hero for physics
-		game.physics.enable(this.hero, Phaser.Physics.ARCADE);
+		this.hero.body.gravity.y = 200;
+        this.hero.body.collideWorldBounds = true;
+        this.ground.body.immovable = true;
 		
+		this.ground.body.immovable = true;
 		
     },
     mouseDown: function() {
@@ -47,5 +53,8 @@ var StateMain = {
 	doJump: function() {
         this.hero.body.velocity.y = -this.power * 12;
     },
-    update: function() {}
+    update: function() {
+		 game.physics.arcade.collide(this.hero, this.ground);
+		
+	}
 }

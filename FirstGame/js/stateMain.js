@@ -30,12 +30,8 @@ var StateMain = {
         this.startY = this.hero.y;
         //set listeners
         game.input.onDown.add(this.mouseDown, this);
-
         this.blocks = game.add.group();
         this.makeBlocks();
-        this.blocks.x = game.width - this.blocks.width;
-        this.blocks.y=this.ground.y-50;
-        
     },
     mouseDown: function() {
         if (this.hero.y != this.startY) {
@@ -56,7 +52,7 @@ var StateMain = {
     increasePower: function() {
         this.power++;
         this.powerBar.width = this.power;
-        if (this.power > 50) {
+        if (this.power &gt; 50) {
             this.power = 50;
         }
     },
@@ -64,13 +60,52 @@ var StateMain = {
         this.hero.body.velocity.y = -this.power * 12;
     },
     makeBlocks: function() {
-        var wallHeight=game.rnd.integerInRange(2, 6);
-        for (var i = 0; i < wallHeight; i++) {
-            var block = game.add.sprite(0, -i * 25, "block");
+        this.blocks.removeAll();
+        var wallHeight = game.rnd.integerInRange(1, 4);
+        for (var i = 0; i &lt; wallHeight; i++) {
+            var block = game.add.sprite(0, -i * 50, "block");
             this.blocks.add(block);
         }
+        this.blocks.x = game.width - this.blocks.width
+        this.blocks.y = this.ground.y - 50;
+        //
+        //Loop through each block
+        //and apply physics
+        this.blocks.forEach(function(block) {
+            //enable physics
+            game.physics.enable(block, Phaser.Physics.ARCADE);
+            //set the x velocity to -160
+            block.body.velocity.x = -150;
+            //apply some gravity to the block
+            //not too much or the blocks will bounce
+            //against each other
+            block.body.gravity.y = 4;
+            //set the bounce so the blocks
+            //will react to the runner
+            block.body.bounce.set(1, 1);
+        });
     },
     update: function() {
         game.physics.arcade.collide(this.hero, this.ground);
+        //
+        //collide the hero with the blocks
+        //
+        game.physics.arcade.collide(this.hero, this.blocks);
+        //
+        //colide the blocks with the ground
+        //
+        game.physics.arcade.collide(this.ground, this.blocks);
+        //
+        //when only specifying one group, all children in that
+        //group will collide with each other
+        //
+        game.physics.arcade.collide(this.blocks);
+        //
+        //get the first child
+        var fchild = this.blocks.getChildAt(0);
+        //if off the screen reset the blocks
+        if (fchild.x &lt; -game.width) {
+            this.makeBlocks();
+        }
     }
 }

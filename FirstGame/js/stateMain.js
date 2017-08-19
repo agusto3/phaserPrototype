@@ -17,9 +17,11 @@ var StateMain = {
         //add the power bar just above the head of the hero
         this.powerBar = game.add.sprite(this.hero.x + 25, this.hero.y - 25, "bar");
         this.powerBar.width = 0;
-        //set listeners
-        game.input.onUp.add(this.mouseUp, this);
-        game.input.onDown.add(this.mouseDown, this);
+       
+        
+		//record the initial position
+		this.startY = this.hero.y;
+        
 
 		//start the physics engine
         game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -30,18 +32,28 @@ var StateMain = {
 		this.hero.body.gravity.y = 200;
         this.hero.body.collideWorldBounds = true;
         this.ground.body.immovable = true;
+		//set listeners
+		game.input.onDown.add(this.mouseDown, this);
 		
-		this.ground.body.immovable = true;
-		
+		this.blocks = game.add.group();
     },
     mouseDown: function() {
+		
+		if (this.hero.y != this.startY) {
+			return;
+		}
+		
+		game.input.onDown.remove(this.mouseDown, this);
         this.timer = game.time.events.loop(Phaser.Timer.SECOND / 1000, this.increasePower, this);
+		game.input.onUp.add(this.mouseUp, this);
     },
     mouseUp: function() {
+		game.input.onUp.add(this.mouseUp, this);
 		this.doJump();
         game.time.events.remove(this.timer);
         this.power = 0;
         this.powerBar.width = 0;
+		game.input.onDown.add(this.mouseDown, this);
     },
     increasePower: function() {
         this.power++;
@@ -56,5 +68,12 @@ var StateMain = {
     update: function() {
 		 game.physics.arcade.collide(this.hero, this.ground);
 		
-	}
+	},
+	makeBlocks: function() {
+        var wallHeight=game.rnd.integerInRange(2, 6);
+        for (var i = 0; i < wallHeight; i++) {
+            var block = game.add.sprite(0, -i * 25, "block");
+            this.blocks.add(block);
+        }
+    }
 }

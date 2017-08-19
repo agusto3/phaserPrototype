@@ -1,4 +1,5 @@
-    preload: function() {
+var StateMain = {    
+	preload: function() {
         game.load.image("ground", "images/ground.png");
         game.load.image("hero", "images/hero.png");
         game.load.image("bar", "images/powerbar.png");

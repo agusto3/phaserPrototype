@@ -71,10 +71,7 @@ var StateMain = {
     },
     update: function() {
 		 game.physics.arcade.collide(this.hero, this.ground);
-		 
-		 this.timerBlock = game.time.events.loop(Phaser.Timer.SECOND / 10, this.moveBlocks, this);
-
-		
+	
 	},
 	makeBlocks: function() {
         var wallHeight=game.rnd.integerInRange(2, 6);

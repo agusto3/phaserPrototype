@@ -62,7 +62,7 @@ var StateMain = {
     makeBlocks: function() {
         this.blocks.removeAll();
         var wallHeight = game.rnd.integerInRange(1, 4);
-        for (var i = 0; i &lt; wallHeight; i++) {
+        for (var i = 0; i< wallHeight; i++) {
             var block = game.add.sprite(0, -i * 50, "block");
             this.blocks.add(block);
         }

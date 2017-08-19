@@ -19,8 +19,7 @@ var StateMain = {
         this.powerBar.width = 0;
        
         
-		//record the initial position
-		this.startY = this.hero.y;
+		
         
 
 		//start the physics engine
@@ -32,6 +31,10 @@ var StateMain = {
 		this.hero.body.gravity.y = 200;
         this.hero.body.collideWorldBounds = true;
         this.ground.body.immovable = true;
+		
+		//record the initial position
+		this.startY = this.hero.y;
+		
 		//set listeners
 		game.input.onDown.add(this.mouseDown, this);
 		

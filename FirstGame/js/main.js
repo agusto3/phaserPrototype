@@ -5,7 +5,7 @@ window.onload = function()
 
    if (isMobile==-1)
     {
-        game=new Phaser.Game(640,480,Phaser.AUTO,"ph_game");
+        game=new Phaser.Game(800,640,Phaser.AUTO,"ph_game");
     }
     else
     {       

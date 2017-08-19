@@ -19,6 +19,14 @@ var StateMain = {
         //set listeners
         game.input.onUp.add(this.mouseUp, this);
         game.input.onDown.add(this.mouseDown, this);
+
+		//start the physics engine
+		game.physics.startSystem(Phaser.Physics.ARCADE);
+		
+		//enable the hero for physics
+		game.physics.enable(this.hero, Phaser.Physics.ARCADE);
+		
+		
     },
     mouseDown: function() {
         this.timer = game.time.events.loop(Phaser.Timer.SECOND / 1000, this.increasePower, this);
@@ -34,6 +42,9 @@ var StateMain = {
         if (this.power > 50) {
             this.power = 50;
         }
+    },
+	doJump: function() {
+        this.hero.body.velocity.y = -this.power * 12;
     },
     update: function() {}
 }

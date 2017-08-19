@@ -52,7 +52,7 @@ var StateMain = {
     increasePower: function() {
         this.power++;
         this.powerBar.width = this.power;
-        if (this.power &gt; 50) {
+        if (this.power > 50) {
             this.power = 50;
         }
     },

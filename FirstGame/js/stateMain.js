@@ -1,11 +1,14 @@
-var StateMain = {
     preload: function() {
         game.load.image("ground", "images/ground.png");
         game.load.image("hero", "images/hero.png");
         game.load.image("bar", "images/powerbar.png");
         game.load.image("block", "images/block.png");
+        game.load.image("bird", "images/bird.png");
+        game.load.image("playAgain", "images/playAgain.png");
+        game.load.image("clouds", "images/clouds.png");
     },
     create: function() {
+        this.clickLock = false;
         this.power = 0;
         //turn the background sky blue
         game.stage.backgroundColor = "#00ffff";
@@ -16,6 +19,9 @@ var StateMain = {
         //add the power bar just above the head of the hero
         this.powerBar = game.add.sprite(this.hero.x + 25, this.hero.y - 25, "bar");
         this.powerBar.width = 0;
+        //add the clouds
+        this.clouds = game.add.sprite(0, 0, "clouds");
+        this.clouds.width = game.width;
         //start the physics engine
         game.physics.startSystem(Phaser.Physics.ARCADE);
         //enable the hero for physics
@@ -32,8 +38,12 @@ var StateMain = {
         game.input.onDown.add(this.mouseDown, this);
         this.blocks = game.add.group();
         this.makeBlocks();
+        this.makeBird();
     },
     mouseDown: function() {
+        if (this.clickLock == true) {
+            return;
+        }
         if (this.hero.y != this.startY) {
             return;
         }
@@ -62,7 +72,7 @@ var StateMain = {
     makeBlocks: function() {
         this.blocks.removeAll();
         var wallHeight = game.rnd.integerInRange(1, 4);
-        for (var i = 0; i< wallHeight; i++) {
+        for (var i = 0; i < wallHeight; i++) {
             var block = game.add.sprite(0, -i * 50, "block");
             this.blocks.add(block);
         }
@@ -85,14 +95,32 @@ var StateMain = {
             block.body.bounce.set(1, 1);
         });
     },
+    makeBird: function() {
+        //if the bird already exists 
+        //destory it
+        if (this.bird) {
+            this.bird.destroy();
+        }
+        //pick a number at the top of the screen
+        //between 10 percent and 40 percent of the height of the screen
+        var birdY = game.rnd.integerInRange(game.height * .1, game.height * .4);
+        //add the bird sprite to the game
+        this.bird = game.add.sprite(game.width + 100, birdY, "bird");
+        //enable the sprite for physics
+        game.physics.enable(this.bird, Phaser.Physics.ARCADE);
+        //set the x velocity at -200 which is a little faster than the blocks
+        this.bird.body.velocity.x = -200;
+        //set the bounce for the bird
+        this.bird.body.bounce.set(2, 2);
+    },
     update: function() {
         game.physics.arcade.collide(this.hero, this.ground);
         //
         //collide the hero with the blocks
         //
-        game.physics.arcade.collide(this.hero, this.blocks);
+        game.physics.arcade.collide(this.hero, this.blocks, this.delayOver, null, this);
         //
-        //colide the blocks with the ground
+        //collide the blocks with the ground
         //
         game.physics.arcade.collide(this.ground, this.blocks);
         //
@@ -100,6 +128,9 @@ var StateMain = {
         //group will collide with each other
         //
         game.physics.arcade.collide(this.blocks);
+        //colide the hero with the bird
+        //
+        game.physics.arcade.collide(this.hero, this.bird, this.delayOver, null, this);
         //
         //get the first child
         var fchild = this.blocks.getChildAt(0);
@@ -107,5 +138,21 @@ var StateMain = {
         if (fchild.x < -game.width) {
             this.makeBlocks();
         }
+        //if the bird has flown off screen
+        //reset it
+        if (this.bird.x < 0) {
+            this.makeBird();
+        }
+        if (this.hero.y < this.hero.height) {
+            this.hero.body.velocity.y=200;
+            this.delayOver();
+        }
+    },
+    delayOver: function() {
+        this.clickLock = true;
+        game.time.events.add(Phaser.Timer.SECOND, this.gameOver, this);
+    },
+    gameOver: function() {
+        game.state.start("StateOver");
     }
 }

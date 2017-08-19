@@ -39,6 +39,7 @@ var StateMain = {
 		game.input.onDown.add(this.mouseDown, this);
 		
 		this.blocks = game.add.group();
+		this.makeBlocks();
     },
     mouseDown: function() {
 		

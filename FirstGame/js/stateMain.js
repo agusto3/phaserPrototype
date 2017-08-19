@@ -38,6 +38,8 @@ var StateMain = {
 		//set listeners
 		game.input.onDown.add(this.mouseDown, this);
 		
+		this.makeBlocks();
+		
 		this.blocks = game.add.group();
     },
     mouseDown: function() {

@@ -104,7 +104,7 @@ var StateMain = {
         //get the first child
         var fchild = this.blocks.getChildAt(0);
         //if off the screen reset the blocks
-        if (fchild.x &lt; -game.width) {
+        if (fchild.x < -game.width) {
             this.makeBlocks();
         }
     }

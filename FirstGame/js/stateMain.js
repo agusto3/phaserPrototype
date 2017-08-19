@@ -32,6 +32,7 @@ var StateMain = {
         this.timer = game.time.events.loop(Phaser.Timer.SECOND / 1000, this.increasePower, this);
     },
     mouseUp: function() {
+		this.doJump();
         game.time.events.remove(this.timer);
         this.power = 0;
         this.powerBar.width = 0;

@@ -18,7 +18,7 @@ var StateMain = {
         this.ground = game.add.sprite(0, game.height * .9, "ground");
         //add the hero in 
         this.hero = game.add.sprite(game.width * .2, this.ground.y - 25, "hero");
-		this.mummy = game.add.sprite(this.hero.x, this.hero.y, 'mummy');
+		this.mummy = game.add.sprite(this.hero.x, this.hero.y+5, 'mummy');
 		
         //add the power bar just above the head of the hero
         this.powerBar = game.add.sprite(this.hero.x + 25, this.hero.y - 25, "bar");
@@ -78,6 +78,7 @@ var StateMain = {
     },
     doJump: function() {
         this.hero.body.velocity.y = -this.power * 12;
+		this.mummy.body.velocity.y = this.hero.body.velocity.y; 
     },
     makeBlocks: function() {
         this.blocks.removeAll();

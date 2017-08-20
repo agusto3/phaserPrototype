@@ -126,8 +126,8 @@ var StateMain = {
 		mummy.animations.add('walk');
 		mummy.animations.play('walk', 20, true);
 
-		total++;
-		timer = game.time.now + 100;
+		/*total++;
+		timer = game.time.now + 100;*/
 
 	},
     update: function() {

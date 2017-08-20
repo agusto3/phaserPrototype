@@ -18,7 +18,7 @@ var StateMain = {
         this.ground = game.add.sprite(0, game.height * .9, "ground");
         //add the hero in 
         this.hero = game.add.sprite(game.width * .2, this.ground.y - 25, "hero");
-		this.mummy = game.add.sprite(this.hero.x, this.hero.y+25, 'mummy');
+		this.mummy = game.add.sprite(this.hero.x, this.hero.y - 25, 'mummy');
 		
         //add the power bar just above the head of the hero
         this.powerBar = game.add.sprite(this.hero.x + 25, this.hero.y - 25, "bar");
@@ -48,8 +48,6 @@ var StateMain = {
         this.blocks = game.add.group();
         this.makeBlocks();
         this.makeBird();
-		//this.releaseMummy();
-		//mummy.scale.setTo(2, 2);
 
 		this.mummy.animations.add('walk');
 		this.mummy.animations.play('walk', 20, true);
@@ -129,22 +127,14 @@ var StateMain = {
         //set the bounce for the bird
         this.bird.body.bounce.set(2, 2);
     },
-	releaseMummy: function () {
-
-		
-
-		
-
-		/*total++;
-		timer = game.time.now + 100;*/
-
-	},
     update: function() {
         game.physics.arcade.collide(this.hero, this.ground);
+		game.physics.arcade.collide(this.mummy, this.ground);
         //
         //collide the hero with the blocks
         //
         game.physics.arcade.collide(this.hero, this.blocks, this.delayOver, null, this);
+		game.physics.arcade.collide(this.mummy, this.blocks, this.delayOver, null, this);
         //
         //collide the blocks with the ground
         //
@@ -157,6 +147,7 @@ var StateMain = {
         //colide the hero with the bird
         //
         game.physics.arcade.collide(this.hero, this.bird, this.delayOver, null, this);
+		game.physics.arcade.collide(this.mummy, this.bird, this.delayOver, null, this);
         //
         //get the first child
         var fchild = this.blocks.getChildAt(0);

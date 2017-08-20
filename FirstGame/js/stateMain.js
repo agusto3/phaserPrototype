@@ -62,7 +62,7 @@ var StateMain = {
         /*if (this.hero.y != this.startY) {
             return;
         }*/
-		if (this.mummy.y + 25 != this.startY) {
+		if (this.mummy.y - 25 != this.startY) {
             return;
         }
         game.input.onDown.remove(this.mouseDown, this);

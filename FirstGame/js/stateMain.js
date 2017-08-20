@@ -21,7 +21,8 @@ var StateMain = {
 		this.mummy = game.add.sprite(game.width * .2, this.ground.y - 50, 'mummy');
 		
         //add the power bar just above the head of the hero
-        this.powerBar = game.add.sprite(this.hero.x + 25, this.hero.y - 25, "bar");
+        //this.powerBar = game.add.sprite(this.hero.x + 25, this.hero.y - 25, "bar");
+		this.powerBar = game.add.sprite(this.mummy.x + 25, this.mummy.y - 25, "bar");
         this.powerBar.width = 0;
         //add the clouds
         this.clouds = game.add.sprite(0, 0, "clouds");
@@ -85,7 +86,7 @@ var StateMain = {
     },
     doJump: function() {
         //this.hero.body.velocity.y = -this.power * 12;
-		this.mummy.body.velocity.y = this.hero.body.velocity.y; 
+		this.mummy.body.velocity.y =  -this.power * 12; 
     },
     makeBlocks: function() {
         this.blocks.removeAll();

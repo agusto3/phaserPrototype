@@ -65,9 +65,9 @@ var StateMain = {
         /*if (this.hero.y != this.startY) {
             return;
         }*/
-		/*if (this.mummy.y -5 != this.startY) {
+		if (this.mummy.y -5 != this.startY) {
             return;
-        }*/
+        }
         game.input.onDown.remove(this.mouseDown, this);
         this.timer = game.time.events.loop(Phaser.Timer.SECOND / 1000, this.increasePower, this);
         game.input.onUp.add(this.mouseUp, this);

@@ -7,6 +7,7 @@ var StateMain = {
         game.load.image("bird", "images/bird.png");
         game.load.image("playAgain", "images/playAgain.png");
         game.load.image("clouds", "images/clouds.png");
+		game.load.spritesheet('mummy', 'images/metalslug_mummy37x45.png', 37, 45, 18);
     },
     create: function() {
         this.clickLock = false;
@@ -40,6 +41,7 @@ var StateMain = {
         this.blocks = game.add.group();
         this.makeBlocks();
         this.makeBird();
+		releaseMummy();
     },
     mouseDown: function() {
         if (this.clickLock == true) {
@@ -114,6 +116,20 @@ var StateMain = {
         //set the bounce for the bird
         this.bird.body.bounce.set(2, 2);
     },
+	function releaseMummy() {
+
+		var mummy = game.add.sprite(this.hero.x, this.hero.y, 'mummy');
+
+		mummy.scale.setTo(2, 2);
+
+
+		mummy.animations.add('walk');
+		mummy.animations.play('walk', 20, true);
+
+		total++;
+		timer = game.time.now + 100;
+
+	},
     update: function() {
         game.physics.arcade.collide(this.hero, this.ground);
         //

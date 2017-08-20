@@ -1,7 +1,7 @@
 var StateMain = {
     preload: function() {
         game.load.image("ground", "images/ground.png");
-        game.load.image("hero", "images/hero.png");
+        //game.load.image("hero", "images/hero.png");
         game.load.image("bar", "images/powerbar.png");
         game.load.image("block", "images/block.png");
         game.load.image("bird", "images/bird.png");
@@ -17,8 +17,8 @@ var StateMain = {
         //add the ground
         this.ground = game.add.sprite(0, game.height * .9, "ground");
         //add the hero in 
-        this.hero = game.add.sprite(game.width * .2, this.ground.y - 25, "hero");
-		this.mummy = game.add.sprite(this.hero.x, this.hero.y - 25, 'mummy');
+        //this.hero = game.add.sprite(game.width * .2, this.ground.y - 25, "hero");
+		this.mummy = game.add.sprite(game.width * .2, this.ground.y - 50,, 'mummy');
 		
         //add the power bar just above the head of the hero
         this.powerBar = game.add.sprite(this.hero.x + 25, this.hero.y - 25, "bar");
@@ -29,20 +29,21 @@ var StateMain = {
         //start the physics engine
         game.physics.startSystem(Phaser.Physics.ARCADE);
         //enable the hero for physics
-        game.physics.enable(this.hero, Phaser.Physics.ARCADE);
+        //game.physics.enable(this.hero, Phaser.Physics.ARCADE);
 		game.physics.enable(this.mummy, Phaser.Physics.ARCADE);
         game.physics.enable(this.ground, Phaser.Physics.ARCADE);
 		
         //game.physics.arcade.gravity.y = 100;
-        this.hero.body.gravity.y = 200;
-        this.hero.body.collideWorldBounds = true;
+        /*this.hero.body.gravity.y = 200;
+        this.hero.body.collideWorldBounds = true;*/
 		
 		this.mummy.body.gravity.y = 200;
         this.mummy.body.collideWorldBounds = true;
         //this.hero.body.bounce.set(0, .2);
         this.ground.body.immovable = true;
         //record the initial position
-        this.startY = this.hero.y;
+        //this.startY = this.hero.y;
+		this.startY = this.mummy.y;
         //set listeners
         game.input.onDown.add(this.mouseDown, this);
         this.blocks = game.add.group();
@@ -57,7 +58,10 @@ var StateMain = {
         if (this.clickLock == true) {
             return;
         }
-        if (this.hero.y != this.startY) {
+        /*if (this.hero.y != this.startY) {
+            return;
+        }*/
+		if (this.mummy.y != this.startY) {
             return;
         }
         game.input.onDown.remove(this.mouseDown, this);
@@ -80,7 +84,7 @@ var StateMain = {
         }
     },
     doJump: function() {
-        this.hero.body.velocity.y = -this.power * 12;
+        //this.hero.body.velocity.y = -this.power * 12;
 		this.mummy.body.velocity.y = this.hero.body.velocity.y; 
     },
     makeBlocks: function() {
@@ -128,12 +132,12 @@ var StateMain = {
         this.bird.body.bounce.set(2, 2);
     },
     update: function() {
-        game.physics.arcade.collide(this.hero, this.ground);
+        //game.physics.arcade.collide(this.hero, this.ground);
 		game.physics.arcade.collide(this.mummy, this.ground);
         //
         //collide the hero with the blocks
         //
-        game.physics.arcade.collide(this.hero, this.blocks, this.delayOver, null, this);
+        //game.physics.arcade.collide(this.hero, this.blocks, this.delayOver, null, this);
 		game.physics.arcade.collide(this.mummy, this.blocks, this.delayOver, null, this);
         //
         //collide the blocks with the ground
@@ -146,7 +150,7 @@ var StateMain = {
         game.physics.arcade.collide(this.blocks);
         //colide the hero with the bird
         //
-        game.physics.arcade.collide(this.hero, this.bird, this.delayOver, null, this);
+        //game.physics.arcade.collide(this.hero, this.bird, this.delayOver, null, this);
 		game.physics.arcade.collide(this.mummy, this.bird, this.delayOver, null, this);
         //
         //get the first child
@@ -160,8 +164,12 @@ var StateMain = {
         if (this.bird.x < 0) {
             this.makeBird();
         }
-        if (this.hero.y < this.hero.height) {
+        /*if (this.hero.y < this.hero.height) {
             this.hero.body.velocity.y=200;
+            this.delayOver();
+        }*/
+		if (this.mummy.y < this.mummy.height) {
+            this.mummy.body.velocity.y=200;
             this.delayOver();
         }
     },

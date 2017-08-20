@@ -41,7 +41,7 @@ var StateMain = {
         this.blocks = game.add.group();
         this.makeBlocks();
         this.makeBird();
-		releaseMummy();
+		this.releaseMummy();
     },
     mouseDown: function() {
         if (this.clickLock == true) {

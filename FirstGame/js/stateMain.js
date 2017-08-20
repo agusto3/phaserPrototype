@@ -8,7 +8,7 @@ var StateMain = {
         game.load.image("playAgain", "images/playAgain.png");
         game.load.image("clouds", "images/clouds.png");
 		//game.load.spritesheet('mummy', 'images/Metalslug_mummy37x45.png', 37, 45, 18);
-		game.load.spritesheet('mummy', 'images/dog.png', 25, 35, 24);
+		game.load.spritesheet('mummy', 'images/dog.png', 40, 50, 10);
     },
     create: function() {
         this.clickLock = false;
@@ -65,9 +65,9 @@ var StateMain = {
         /*if (this.hero.y != this.startY) {
             return;
         }*/
-		if (this.mummy.y -5 != this.startY) {
+		/*if (this.mummy.y -5 != this.startY) {
             return;
-        }
+        }*/
         game.input.onDown.remove(this.mouseDown, this);
         this.timer = game.time.events.loop(Phaser.Timer.SECOND / 1000, this.increasePower, this);
         game.input.onUp.add(this.mouseUp, this);

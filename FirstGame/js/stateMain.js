@@ -52,7 +52,7 @@ var StateMain = {
         this.makeBlocks();
         this.makeBird();
 
-		//this.mummy.scale.setTo(0.5,0.5);
+		this.mummy.scale.setTo(2,2);
 		
 		this.mummy.animations.add('walk');
 		//this.mummy.animations.play('walk', 20, true);

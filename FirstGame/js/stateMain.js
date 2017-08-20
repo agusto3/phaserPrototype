@@ -8,7 +8,7 @@ var StateMain = {
         game.load.image("playAgain", "images/playAgain.png");
         game.load.image("clouds", "images/clouds.png");
 		//game.load.spritesheet('mummy', 'images/Metalslug_mummy37x45.png', 37, 45, 18);
-		game.load.spritesheet('mummy', 'images/dog.png', 45, 25, 25);
+		game.load.spritesheet('mummy', 'images/dog.png', 48, 27, 25);
     },
     create: function() {
         this.clickLock = false;

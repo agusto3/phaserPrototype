@@ -19,7 +19,7 @@ var StateMain = {
         this.ground = game.add.sprite(0, game.height * .9, "ground");
         //add the hero in 
         //this.hero = game.add.sprite(game.width * .2, this.ground.y - 25, "hero");
-		this.mummy = game.add.sprite(game.width * .2, this.ground.y - 50, 'mummy');
+		this.mummy = game.add.sprite(game.width * .2, this.ground.y - 45, 'mummy');
 		
         //add the power bar just above the head of the hero
         //this.powerBar = game.add.sprite(this.hero.x + 25, this.hero.y - 25, "bar");
@@ -69,6 +69,10 @@ var StateMain = {
 		/*if (this.mummy.y -5 != this.startY) {
             return;
         }*/
+		
+		if (this.mummy.y -24 != this.startY) {
+            return;
+        }
         game.input.onDown.remove(this.mouseDown, this);
         this.timer = game.time.events.loop(Phaser.Timer.SECOND / 1000, this.increasePower, this);
         game.input.onUp.add(this.mouseUp, this);

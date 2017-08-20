@@ -52,6 +52,8 @@ var StateMain = {
         this.makeBlocks();
         this.makeBird();
 
+		mummy.scale.setTo(0.5,0.5);
+		
 		this.mummy.animations.add('walk');
 		this.mummy.animations.play('walk', 20, true);
 		

@@ -116,7 +116,7 @@ var StateMain = {
         //set the bounce for the bird
         this.bird.body.bounce.set(2, 2);
     },
-	function releaseMummy() {
+	releaseMummy: function () {
 
 		var mummy = game.add.sprite(this.hero.x, this.hero.y, 'mummy');
 

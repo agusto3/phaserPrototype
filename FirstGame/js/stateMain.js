@@ -18,7 +18,7 @@ var StateMain = {
         this.ground = game.add.sprite(0, game.height * .9, "ground");
         //add the hero in 
         this.hero = game.add.sprite(game.width * .2, this.ground.y - 25, "hero");
-		this.mummy = game.add.sprite(this.hero.x, this.hero.y+5, 'mummy');
+		this.mummy = game.add.sprite(this.hero.x, this.hero.y+25, 'mummy');
 		
         //add the power bar just above the head of the hero
         this.powerBar = game.add.sprite(this.hero.x + 25, this.hero.y - 25, "bar");
@@ -34,6 +34,9 @@ var StateMain = {
         //game.physics.arcade.gravity.y = 100;
         this.hero.body.gravity.y = 200;
         this.hero.body.collideWorldBounds = true;
+		
+		this.mummy.body.gravity.y = 200;
+        this.mummy.body.collideWorldBounds = true;
         //this.hero.body.bounce.set(0, .2);
         this.ground.body.immovable = true;
         //record the initial position

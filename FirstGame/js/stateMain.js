@@ -46,9 +46,8 @@ var StateMain = {
 		//this.releaseMummy();
 		//mummy.scale.setTo(2, 2);
 
-
-		mummy.animations.add('walk');
-		mummy.animations.play('walk', 20, true);
+		this.mummy.animations.add('walk');
+		this.mummy.animations.play('walk', 20, true);
 		
     },
     mouseDown: function() {

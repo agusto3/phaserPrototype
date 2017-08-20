@@ -70,7 +70,7 @@ var StateMain = {
             return;
         }*/
 		
-		if (this.mummy.y -24 != this.startY) {
+		if (this.mummy.y -19 != this.startY) {
             return;
         }
         game.input.onDown.remove(this.mouseDown, this);

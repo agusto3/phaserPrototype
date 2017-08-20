@@ -18,6 +18,8 @@ var StateMain = {
         this.ground = game.add.sprite(0, game.height * .9, "ground");
         //add the hero in 
         this.hero = game.add.sprite(game.width * .2, this.ground.y - 25, "hero");
+		this.mummy = game.add.sprite(this.hero.x, this.hero.y, 'mummy');
+		
         //add the power bar just above the head of the hero
         this.powerBar = game.add.sprite(this.hero.x + 25, this.hero.y - 25, "bar");
         this.powerBar.width = 0;
@@ -41,7 +43,13 @@ var StateMain = {
         this.blocks = game.add.group();
         this.makeBlocks();
         this.makeBird();
-		this.releaseMummy();
+		//this.releaseMummy();
+		//mummy.scale.setTo(2, 2);
+
+
+		mummy.animations.add('walk');
+		mummy.animations.play('walk', 20, true);
+		
     },
     mouseDown: function() {
         if (this.clickLock == true) {
@@ -118,13 +126,9 @@ var StateMain = {
     },
 	releaseMummy: function () {
 
-		var mummy = game.add.sprite(this.hero.x, this.hero.y, 'mummy');
+		
 
-		mummy.scale.setTo(2, 2);
-
-
-		mummy.animations.add('walk');
-		mummy.animations.play('walk', 20, true);
+		
 
 		/*total++;
 		timer = game.time.now + 100;*/

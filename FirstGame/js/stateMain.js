@@ -30,7 +30,9 @@ var StateMain = {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         //enable the hero for physics
         game.physics.enable(this.hero, Phaser.Physics.ARCADE);
+		game.physics.enable(this.mummy, Phaser.Physics.ARCADE);
         game.physics.enable(this.ground, Phaser.Physics.ARCADE);
+		
         //game.physics.arcade.gravity.y = 100;
         this.hero.body.gravity.y = 200;
         this.hero.body.collideWorldBounds = true;

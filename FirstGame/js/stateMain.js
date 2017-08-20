@@ -7,8 +7,8 @@ var StateMain = {
         game.load.image("bird", "images/bird.png");
         game.load.image("playAgain", "images/playAgain.png");
         game.load.image("clouds", "images/clouds.png");
-		//game.load.spritesheet('mummy', 'images/Metalslug_mummy37x45.png', 37, 45, 18);
-		game.load.spritesheet('mummy', 'images/dog.jpg', 37, 45, 18);
+		game.load.spritesheet('mummy', 'images/Metalslug_mummy37x45.png', 37, 45, 18);
+		//game.load.spritesheet('mummy', 'images/dog.jpg', 37, 45, 18);
     },
     create: function() {
         this.clickLock = false;
@@ -52,7 +52,7 @@ var StateMain = {
         this.makeBlocks();
         this.makeBird();
 
-		this.mummy.scale.setTo(0.5,0.5);
+		//this.mummy.scale.setTo(0.5,0.5);
 		
 		this.mummy.animations.add('walk');
 		this.mummy.animations.play('walk', 20, true);
